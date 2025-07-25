@@ -9,9 +9,11 @@ def main_menu():
 
     while True:
         # Display the menu options to the user
-        print("\n=== LOCAL MARKET INVENTORY SYSTEM ===")
+        print("\n LOCAL MARKET INVENTORY SYSTEM")
+        print(" -----------------------------")
         print("1. Check Inventory")
         print("2. Exit")
+
 
         # Ask for user input
         choice = input("Choose an option (1-2): ")
@@ -29,3 +31,7 @@ def main_menu():
         # If user enters something invalid
         else:
             print("Invalid input. Please try again.")
+
+# Run the main menu function
+if __name__ == "__main__":
+    main_menu()

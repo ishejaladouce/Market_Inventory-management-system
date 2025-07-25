@@ -1,12 +1,8 @@
-# ------------------------------------------
-# This file contains a function to display
-# the current inventory in a table format.
-# It should be called after fetching products
-# from the database.
-# ------------------------------------------
+# This file contains a function to display the current inventory in a table format. 
+# It should be called after fetching products from the database.
 
-# This function takes a list of product dictionaries
-# and prints them in a readable inventory format.
+
+# Function to display the inventory in a table format
 def check_inventory(products):
     
     #check if the products list is empty
