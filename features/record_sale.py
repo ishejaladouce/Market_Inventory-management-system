@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from datetime import datetime
 
 inventory = {
@@ -46,8 +45,3 @@ def record_sale():
 
 
 record_sale()
-=======
-#This file contains a function to record a sale
-
-#
->>>>>>> 338803f (fetch and format all sales records from MYSQL)
