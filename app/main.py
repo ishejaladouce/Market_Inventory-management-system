@@ -5,6 +5,7 @@ from features.check_inventory import check_inventory  # to display inventory
 from db.fetch_products import get_inventory           # to fetch data from MySQL
 from features.record_sale import record_sale
 from db.fetch_sales import get_sales
+from features.view_sales import display_sales_report
 
 # Main menu function that keeps running until the user exits
 def main_menu():
