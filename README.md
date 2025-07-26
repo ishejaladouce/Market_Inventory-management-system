@@ -1,4 +1,4 @@
-# Market_Inventory-management-system
+Market_Inventory-management-system
 
 ## Project Structure
 
