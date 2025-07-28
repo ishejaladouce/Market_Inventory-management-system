@@ -17,6 +17,6 @@ def check_inventory(products):
 
     #Loop through each product and print its details
     for product in products:
-        print(f"{product['name']:<20} {product['quantity']:<10} {product['price']:<15,.0f}")
+        print(f"{product['name']:<20} {product['quantity']:<10} {product['unit_price']:<15,.0f}")
 
         print("-" * 45 + "\n")  # Closing line

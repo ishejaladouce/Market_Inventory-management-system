@@ -5,34 +5,29 @@ from db.db_config import connect_db
 
 # Function to get the inventory from the database
 def get_inventory():
-    
     try:
-        # Connect to the database
         conn = connect_db()
         if not conn:
-            return [] # If connection fails, return an empty list
-        
+            return []
+
         cursor = conn.cursor()
+        cursor.execute("SELECT id, name, quantity, unit_price FROM inventory")  # use unit_price, not price
 
-        # SQL query to fetch all products (product name, quantity, and price)
-        cursor.execute("SELECT name, quantity, price FROM inventory ORDER BY name;")
         rows = cursor.fetchall()
-
-        # close the cursor and connection
         cursor.close()
         conn.close()
 
-        # Format the fetched data into a list of dictionaries
-        products = []
+        inventory = []
         for row in rows:
-            products.append({
-                'name': row[0],
-                'quantity': row[1],
-                'price': float(row[2])
+            inventory.append({
+                "id": row[0],
+                "name": row[1],
+                "quantity": row[2],
+                "unit_price": float(row[3])
             })
 
-        return products 
-    
+        return inventory
+
     except Exception as e:
         print("Error fetching inventory data:", e)
         return []
