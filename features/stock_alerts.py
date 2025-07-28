@@ -1,28 +1,17 @@
-from db.db_config import connect_db
+from tabulate import tabulate
+from db.fetch_stock_alerts import get_stock_alerts
 
-def get_low_stock_products():
-    try:
-        conn = connect_db()
-        cursor = conn.cursor()
-        query = "SELECT product_name, quantity FROM products WHERE quantity < 5"
-        cursor.execute(query)
-        low_stock = cursor.fetchall()
+def display_stock_alerts():
+    alerts = get_stock_alerts()
 
-        cursor.close()
-        conn.close()
-        return low_stock
-    except Exception as e:
-        print("Error fetching low stock products:", e)
-        return []
+    if not alerts:
+        print("\nAll stock levels are healthy \n")
+        return
 
-if __name__ == "__main__":
-    low_stock_items = get_low_stock_products()
-    if not low_stock_items:
-        print("✅ All products have sufficient stock.")
-    else:
-        print("⚠️ Low stock alerts:")
-        for product_name, quantity in low_stock_items:
-            print(f"- {product_name}: only {quantity} left!")
+    table = []
+    for item in alerts:
+        table.append([item["product"], item["quantity"]])
 
-
-
+    headers = ["Product", "Quantity Left"]
+    print("\n LOW STOCK ALERTS ")
+    print(tabulate(table, headers=headers, tablefmt="fancy_grid"))
