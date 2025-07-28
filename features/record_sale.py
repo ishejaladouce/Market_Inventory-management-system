@@ -5,11 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Mock inventory structure (Product: [Quantity, Price])
-inventory = {
-    "Product": [10, 900]  # Example: 10 units at 900 RWF each
-}
-
 def connect_db():
     try:
         conn = mysql.connector.connect(
@@ -27,12 +22,8 @@ def connect_db():
 def record_sale():
     product = input("Enter product name: ").strip().title()
 
-    if product not in inventory:
-        print("Product not found in inventory.")
-        return
-
     try:
-        quantity = int(input("Enter quantity being sold: "))
+        quantity = int(input("Enter quantity sold: "))
     except ValueError:
         print("Invalid input: Quantity must be a number.")
         return
@@ -41,47 +32,58 @@ def record_sale():
         print("Quantity must be greater than 0.")
         return
 
-    available_stock = inventory[product][0]
-    unit_price = inventory[product][1]
-
-    if quantity > available_stock:
-        print("Not enough stock in inventory.")
+    conn = connect_db()
+    if not conn:
+        print("Database connection failed.")
         return
 
-    total_price = quantity * unit_price
-    sale_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        cursor = conn.cursor(dictionary=True)
 
-    # Insert sale into database
-    conn = connect_db()
-    if conn:
-        cursor = conn.cursor()
-        try:
-            insert_query = """
-                INSERT INTO sales (product_name, quantity, unit_price, sale_date)
-                VALUES (%s, %s, %s, %s)
-            """
-            cursor.execute(insert_query, (product, quantity, unit_price, sale_time))
-            conn.commit()
-        except Exception as e:
-            print("Failed to insert sale into database:", e)
+        # Check if product exists in inventory
+        cursor.execute("SELECT quantity, unit_price FROM inventory WHERE name = %s", (product,))
+        product_row = cursor.fetchone()
+
+        if not product_row:
+            print(f"Product '{product}' not found in inventory.")
             return
-        finally:
-            cursor.close()
-            conn.close()
-    else:
-        print("Sale not recorded in database due to connection error.")
 
-    # Update local inventory
-    inventory[product][0] -= quantity
+        available_stock = product_row['quantity']
+        unit_price = float(product_row['unit_price'])
 
-    print("\n SALE RECORDED")
-    print(f"Product: {product}")
-    print(f"Quantity: {quantity}")
-    print(f"Unit Price: {unit_price}")
-    print(f"Total Price: {total_price}")
-    print(f"Date & Time: {sale_time}")
-    print(f"Inventory updated. {inventory[product][0]} units remaining of {product}.\n")
+        if quantity > available_stock:
+            print("Not enough stock in inventory.")
+            return
 
-# Uncomment the below if you want to test running this file directly
-# if __name__ == "__main__":
-#     record_sale()
+        total_price = quantity * unit_price
+        sale_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        # Insert sale record
+        insert_sale = """
+            INSERT INTO sales (product_name, quantity, unit_price, sale_date)
+            VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(insert_sale, (product, quantity, unit_price, sale_time))
+
+        # Update inventory quantity
+        update_inventory = """
+            UPDATE inventory SET quantity = quantity - %s WHERE name = %s
+        """
+        cursor.execute(update_inventory, (quantity, product))
+
+        conn.commit()
+
+        print("\nSALE RECORDED:")
+        print(f"Product: {product}")
+        print(f"Quantity: {quantity}")
+        print(f"Unit Price: {unit_price}")
+        print(f"Total Price: {total_price}")
+        print(f"Date & Time: {sale_time}")
+        print(f"Inventory updated. {available_stock - quantity} units remaining of {product}.\n")
+
+    except mysql.connector.Error as err:
+        print(f"Error processing sale: {err}")
+
+    finally:
+        cursor.close()
+        conn.close()

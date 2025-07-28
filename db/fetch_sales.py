@@ -3,7 +3,7 @@
 
 from db.db_config import connect_db
 
-def get_sales():
+def get_sales_data():
     try:
         conn = connect_db()
 
