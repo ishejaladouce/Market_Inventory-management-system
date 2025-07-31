@@ -2,7 +2,7 @@
 
 A complete Python-based inventory management system designed for local markets and small businesses. This system helps you manage product inventory, track sales, and monitor stock levels with a simple command-line interface.
 
-## 🎯 What This System Does
+##  What This System Does
 
 This inventory system was built to solve real business problems:
 - **Track your products** - See what you have in stock at any time
@@ -11,24 +11,24 @@ This inventory system was built to solve real business problems:
 - **Generate reports** - See your sales performance and revenue
 - **Handle different units** - Support for pieces, kilograms, litres, etc.
 
-## 🚀 Key Features
+## Key Features
 
 ###  What's Working Right Now
-- **📦 Inventory Management**: Add and view products with quantities and prices
-- **💰 Sales Tracking**: Record customer purchases with automatic stock reduction
-- **⚠️ Stock Alerts**: Get notified when products have less than 5 units
-- **📊 Sales Reports**: Beautiful formatted reports with revenue summaries
-- **📏 Smart Units**: Products show their measurement units (piece, kg, litre)
-- **💾 Real Database**: All data stored in MySQL database (Aiven cloud)
+- **Inventory Management**: Add and view products with quantities and prices
+- **Sales Tracking**: Record customer purchases with automatic stock reduction
+- **Stock Alerts**: Get notified when products have less than 5 units
+- **Sales Reports**: Beautiful formatted reports with revenue summaries
+- **smart Units**: Products show their measurement units (piece, kg, litre)
+- **Real Database**: All data stored in MySQL database (Aiven cloud)
 
-### 🎨 User Experience
+### User Experience
 - Clean, easy-to-use menu system
 - Beautiful formatted tables for reports
 - Automatic calculations and summaries
 - Error handling with fallback options
 - Measurement units displayed clearly
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### What You Need
 - Python 3.7 or higher
@@ -45,11 +45,11 @@ This inventory system was built to solve real business problems:
 2. **Set up your database credentials**:
    Create a file named `.env` in the project folder with:
    ```env
-   DB_HOST=mysql-database-alustudent-f291.f.aivencloud.com
-   DB_PORT=14220
-   DB_USER=avnadmin
-   DB_PASSWORD=AVNS_2zuXBHUZz6216exHKnx
-   DB_NAME=defaultdb
+   DB_HOST= fill in your credentials
+   DB_PORT= fill in your credentials
+   DB_USER= fill in your credentials
+   DB_PASSWORD= fill in your credentials
+   DB_NAME= fill in your credentials
    ```
 
 3. **Run the system**:
@@ -57,7 +57,7 @@ This inventory system was built to solve real business problems:
    python -m app.main
    ```
 
-## 🎮 How to Use
+## How to Use
 
 ### Starting the System
 ```bash
@@ -100,29 +100,29 @@ You'll see a menu like this:
    - See all sales with revenue totals
    - Track performance over time
 
-## 📁 What's Inside the Project
+## What's Inside the Project
 
 ```
 Market_Inventory-management-system/
 ├── app/
-│   └── main.py              # 🎯 Main application - starts everything
+│   └── main.py              #  Main application - starts everything
 ├── db/
-│   ├── db_config.py         # 🔌 Database connection setup
-│   ├── fetch_products.py    # 📦 Gets inventory data
-│   ├── fetch_sales.py       # 💰 Gets sales data
-│   └── fetch_stock_alerts.py # ⚠️ Gets low stock alerts
+│   ├── db_config.py         #  Database connection setup
+│   ├── fetch_products.py    #  Gets inventory data
+│   ├── fetch_sales.py       #  Gets sales data
+│   └── fetch_stock_alerts.py #  Gets low stock alerts
 ├── features/
-│   ├── check_inventory.py   # 📊 Shows inventory table
-│   ├── create_product.py    # ➕ Adds new products
-│   ├── record_sale.py       # 🛒 Processes sales
-│   ├── stock_alerts.py      # 🚨 Shows low stock warnings
-│   └── view_sales.py        # 📈 Shows sales reports
-├── .env                     # 🔐 Your database password (keep secret!)
-├── requirements.txt         # 📦 Python packages needed
-└── README.md               # 📖 This file
+│   ├── check_inventory.py   #  Shows inventory table
+│   ├── create_product.py    #  Adds new products
+│   ├── record_sale.py       #  Processes sales
+│   ├── stock_alerts.py      #  Shows low stock warnings
+│   └── view_sales.py        #  Shows sales reports
+├── .env                     #  Your database password (keep secret!)
+├── requirements.txt         #  Python packages needed
+└── README.md               #  This file
 ```
 
-## 📊 Sample Outputs
+##  Sample Outputs
 
 ### Inventory Display
 ```
@@ -187,14 +187,14 @@ The system uses two main tables:
 - Links to inventory for automatic stock updates
 
 ### What We Fixed
-- ✅ Database connection issues (switched to PyMySQL)
-- ✅ Measurement units display (piece, kg, litre)
-- ✅ Sales report formatting with summaries
-- ✅ Stock alert system working
-- ✅ Error handling for database issues
-- ✅ Clean code with proper documentation
+-  Database connection issues (switched to PyMySQL)
+-  Measurement units display (piece, kg, litre)
+-  Sales report formatting with summaries
+-  Stock alert system working
+-  Error handling for database issues
+-  Clean code with proper documentation
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
@@ -225,7 +225,7 @@ If something's not working:
 - **Clean Code**: Well-documented and organized
 - **User-Friendly**: Simple menu system anyone can use
 
-## 📈 Future Improvements
+##  Future Improvements
 
 - Add user authentication
 - Export reports to Excel/PDF
