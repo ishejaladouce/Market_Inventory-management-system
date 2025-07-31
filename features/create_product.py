@@ -24,6 +24,15 @@ def add_product():
         except ValueError:
             print("Please enter a valid non-negative number for price.")
 
+    # Measurement input
+    print("Select measurement unit:")
+    print("1. piece")
+    print("2. kg")
+    print("3. litre")
+    measurement_options = {"1": "piece", "2": "kg", "3": "litre"}
+    measurement_choice = input("Enter option number: ").strip()
+    measurement = measurement_options.get(measurement_choice, "piece")  # Default is 'piece'
+
     conn = None
     cursor = None
     try:
@@ -42,11 +51,11 @@ def add_product():
             print(f"\nProduct '{name}' already exists. Use the update option instead.\n")
         else:
             cursor.execute(
-                "INSERT INTO inventory (name, quantity, unit_price) VALUES (%s, %s, %s)",
-                (name, quantity, price)
+                "INSERT INTO inventory (name, quantity, unit_price, measurement_unit) VALUES (%s, %s, %s, %s)",
+                (name, quantity, price, measurement)
             )
             conn.commit()
-            print(f"\nProduct '{name}' added successfully!\n")
+            print(f"\nProduct '{name}' added successfully with measurement '{measurement}'!\n")
 
     except Exception as e:
         print("Error adding product:", e)

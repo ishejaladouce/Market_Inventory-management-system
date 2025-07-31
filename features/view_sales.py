@@ -10,14 +10,15 @@ def display_sales_report():
 
     table = []
     for sale in sales:
+        product_with_unit = f"{sale['product']} ({sale['measurement_unit']})"
         table.append([
-            sale["product"],
+            product_with_unit,
             sale["quantity"],
             f"{sale['unit_price']:,.0f} RWF",
             f"{sale['total']:,.0f} RWF",
             sale["date"]
         ])
 
-    headers = ["Product", "Quantity", "Unit Price", "Total", "Date & Time"]
+    headers = ["Product (Unit)", "Quantity", "Unit Price", "Total", "Date & Time"]
     print("\nSALES REPORT")
     print(tabulate(table, headers=headers, tablefmt="fancy_grid"))

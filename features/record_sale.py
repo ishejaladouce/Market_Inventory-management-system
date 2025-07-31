@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime 
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -32,6 +32,15 @@ def record_sale():
         print("Quantity must be greater than 0.")
         return
 
+    # 💡 Prompt for measurement unit
+    print("\nSelect measurement unit:")
+    print("1. piece")
+    print("2. kg")
+    print("3. litre")
+    measurement_options = {"1": "piece", "2": "kg", "3": "litre"}
+    measurement_choice = input("Enter option number: ")
+    measurement = measurement_options.get(measurement_choice, "piece")  # default to 'piece'
+
     conn = connect_db()
     if not conn:
         print("Database connection failed.")
@@ -58,12 +67,12 @@ def record_sale():
         total_price = quantity * unit_price
         sale_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # Insert sale record
+        # Insert sale record (🆕 including measurement)
         insert_sale = """
-            INSERT INTO sales (product_name, quantity, unit_price, sale_date)
-            VALUES (%s, %s, %s, %s)
+            INSERT INTO sales (product_name, quantity, unit_price, sale_date, measurement_unit)
+            VALUES (%s, %s, %s, %s, %s)
         """
-        cursor.execute(insert_sale, (product, quantity, unit_price, sale_time))
+        cursor.execute(insert_sale, (product, quantity, unit_price, sale_time, measurement))
 
         # Update inventory quantity
         update_inventory = """
@@ -75,7 +84,7 @@ def record_sale():
 
         print("\nSALE RECORDED:")
         print(f"Product: {product}")
-        print(f"Quantity: {quantity}")
+        print(f"Quantity: {quantity} {measurement}")
         print(f"Unit Price: {unit_price}")
         print(f"Total Price: {total_price}")
         print(f"Date & Time: {sale_time}")

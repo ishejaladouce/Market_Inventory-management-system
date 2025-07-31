@@ -1,9 +1,5 @@
-#This file contains the function that connects to the database and retrieves the inventory data.
-
-#Import the database connection function
 from db.db_config import connect_db
 
-# Function to get the inventory from the database
 def get_inventory():
     try:
         conn = connect_db()
@@ -11,7 +7,7 @@ def get_inventory():
             return []
 
         cursor = conn.cursor()
-        cursor.execute("SELECT id, name, quantity, unit_price FROM inventory")  # use unit_price, not price
+        cursor.execute("SELECT id, name, quantity, unit_price, measurement_unit FROM inventory")
 
         rows = cursor.fetchall()
         cursor.close()
@@ -23,7 +19,8 @@ def get_inventory():
                 "id": row[0],
                 "name": row[1],
                 "quantity": row[2],
-                "unit_price": float(row[3])
+                "unit_price": float(row[3]),
+                "measurement_unit": row[4]
             })
 
         return inventory
