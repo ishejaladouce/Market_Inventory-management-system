@@ -10,15 +10,14 @@ def get_sales_data():
 
         cursor.execute("""
             SELECT 
-                s.product_name, 
-                s.quantity, 
-                s.unit_price, 
-                (s.quantity * s.unit_price) AS total_amount, 
-                s.sale_date,
-                p.measurement_unit
-            FROM sales s
-            INNER JOIN products p ON s.product_name = p.product_name
-            ORDER BY s.sale_date DESC
+                product_name, 
+                quantity, 
+                unit_price, 
+                (quantity * unit_price) AS total_amount, 
+                sale_date,
+                measurement_unit
+            FROM sales
+            ORDER BY sale_date DESC
         """)
 
         rows = cursor.fetchall()

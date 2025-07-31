@@ -10,8 +10,9 @@ def display_stock_alerts():
 
     table = []
     for item in alerts:
-        table.append([item["product"], item["quantity"]])
+        product_with_unit = f"{item['product']} ({item['measurement_unit']})"
+        table.append([product_with_unit, item["quantity"]])
 
-    headers = ["Product", "Quantity Left"]
+    headers = ["Product (Unit)", "Quantity Left"]
     print("\n LOW STOCK ALERTS ")
     print(tabulate(table, headers=headers, tablefmt="fancy_grid"))

@@ -12,7 +12,7 @@ def get_stock_alerts():
         cursor = conn.cursor()
 
         cursor.execute("""
-            SELECT name, quantity
+            SELECT name, quantity, measurement_unit
             FROM inventory
             WHERE quantity <= %s  
             ORDER BY quantity ASC
@@ -26,7 +26,8 @@ def get_stock_alerts():
         for row in rows:
             alerts.append({
                 "product": row[0],
-                "quantity": row[1]
+                "quantity": row[1],
+                "measurement_unit": row[2] or "piece"  # Default to "piece" if NULL
             })
 
         return alerts
