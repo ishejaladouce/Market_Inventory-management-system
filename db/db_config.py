@@ -1,8 +1,5 @@
 """
-Database Configuration Module
-============================
-
-This module handles the database connection configuration for the Market Inventory System.
+Database Configuration Modulehandles the database connection configuration for the Market Inventory System.
 It uses PyMySQL to connect to a MySQL database hosted on Aiven cloud.
 
 The connection uses environment variables for security and configuration flexibility.

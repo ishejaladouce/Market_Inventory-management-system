@@ -1,6 +1,5 @@
 """
 Market Inventory Management System
-================================
 
 A Python-based inventory management system for local markets and small businesses.
 This system allows users to manage product inventory, track sales, and monitor stock levels.
@@ -11,10 +10,8 @@ Features:
 - Record sales transactions
 - View low stock alerts
 - Generate sales reports
-- Track revenue and performance
 
-Author: Market Inventory System Team
-Version: 1.0
+This module serves as the main entry point for the application, providing a user-friendly interface
 """
 
 from features.check_inventory import check_inventory  # Display inventory in table format

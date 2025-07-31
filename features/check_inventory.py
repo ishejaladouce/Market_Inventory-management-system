@@ -12,19 +12,9 @@ The display includes a summary with total products, units, and inventory value.
 
 # Function to display the inventory in a table format
 def check_inventory(products):
-    """
-    Displays the current inventory in a formatted table with summary.
     
-    Args:
-        products (list): List of product dictionaries containing inventory data
-                        Each product should have: name, quantity, unit_price, measurement_unit
+    #Displays the current inventory in a formatted table with summary.
     
-    Example:
-        products = [
-            {'name': 'Rice', 'quantity': 50, 'unit_price': 2500, 'measurement_unit': 'kg'},
-            {'name': 'Beans', 'quantity': 30, 'unit_price': 800, 'measurement_unit': 'kg'}
-        ]
-    """
     if not products:
         print("\n Inventory is currently empty. \n")
         return

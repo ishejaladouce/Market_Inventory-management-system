@@ -32,7 +32,7 @@ def record_sale():
         print("Quantity must be greater than 0.")
         return
 
-    # 💡 Prompt for measurement unit
+    #  Prompt for measurement unit
     print("\nSelect measurement unit:")
     print("1. piece")
     print("2. kg")
@@ -67,7 +67,7 @@ def record_sale():
         total_price = quantity * unit_price
         sale_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # Insert sale record (🆕 including measurement)
+        # Insert sale record (including measurement)
         insert_sale = """
             INSERT INTO sales (product_name, quantity, unit_price, sale_date, measurement_unit)
             VALUES (%s, %s, %s, %s, %s)
